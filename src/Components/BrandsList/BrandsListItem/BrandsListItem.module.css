@@ -1,20 +1,18 @@
-.brandsListItemContainer
-{ 
-    display: flex;
-    box-shadow: 2px 4px 8px #a1a1a1; 
-    padding:2%; 
-
+.brandsListItemContainer {
+  display: flex;
+  box-shadow: 2px 4px 8px #a1a1a1;
+  padding: 2%;
 }
 
-.brandsListImageContainer{
-    width: 100px;
-    height: 100px;
-    display: flex;
-    align-items: center;
-    margin-right:2%;
+.brandsListImageContainer {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  margin-right: 2%;
 }
 
-.brandListImage{ 
-    max-width: 100%; 
-    height: auto; 
+.brandListImage {
+  max-width: 100%;
+  height: auto;
 }

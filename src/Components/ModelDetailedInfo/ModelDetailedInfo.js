@@ -1,10 +1,11 @@
 import React from "react";
-import uuid from 'uuid/v1';
+import uuid from "uuid/v1";
 import BrandListItem from "../BrandsList/BrandsListItem/BrandListItem";
-import BackBtn from '../../Widgets/BackBtn/BackBtn';
+import BackBtn from "../../Widgets/BackBtn/BackBtn";
 import layout from "../../hoc/layout";
 import cars from "../../api/cars";
-import ModelDetailedInfoItem from './ModelDetailedInfoItem/ModelDetailedInfoItem';
+import ModelDetailedInfoItem from "./ModelDetailedInfoItem/ModelDetailedInfoItem";
+import Spinner from "../../Widgets/Spinner/Spinner";
 
 class MoreDetailedInfo extends React.Component {
   state = { selectedModelDetails: [], id: null };
@@ -20,37 +21,55 @@ class MoreDetailedInfo extends React.Component {
     });
   }
 
-  renderTemplate =  () =>{
-    const { selectedModelDetails,id } = this.state;
-      return(
-        <>
+  renderTemplate = () => {
+    const { selectedModelDetails, id } = this.state;
+    return (
+      <>
         <BackBtn
-        URL="/"
-        text="Back"
-        onBackBtnClick={() => {
-          this.props.history.push(`/list/${selectedModelDetails.make}`);
-        }} />
+          URL="/"
+          text="Back"
+          onBackBtnClick={() => {
+            this.props.history.push(`/list/${selectedModelDetails.make}`);
+          }}
+        />
+
+        <span className="ml-3">
+          <BackBtn
+            URL="/"
+            text="Back to home"
+            onBackBtnClick={() => {
+              this.props.history.push(`/`);
+            }}
+          />
+        </span>
 
         <BrandListItem
-        brandItem={{
-          make: selectedModelDetails.make,
-          logo: selectedModelDetails.logo,
-          additionalInfo: `Detailed Information of model ${id+1} :`
-        }}
-      />
+          brandItem={{
+            make: selectedModelDetails.make,
+            logo: selectedModelDetails.logo,
+            additionalInfo: `Detailed Information of model ${id + 1} :`
+          }}
+        />
       </>
-      )
-  }
+    );
+  };
 
-  renderModelDetails = ()=>{
-    const {selectedModelDetails} = this.state;
+  renderModelDetails = () => {
+    const { selectedModelDetails } = this.state;
     const output = [];
-    for(let x in selectedModelDetails){
-        output.push(<ModelDetailedInfoItem item={{name:x, value:selectedModelDetails[x]}} key={uuid()}/>)
+    for (let x in selectedModelDetails) {
+      if (x !== "logo") {
+        output.push(
+          <ModelDetailedInfoItem
+            item={{ name: x, value: selectedModelDetails[x] }}
+            key={uuid()}
+          />
+        );
+      }
     }
 
     return output;
-  }
+  };
 
   render() {
     const { selectedModelDetails } = this.state;
@@ -60,11 +79,9 @@ class MoreDetailedInfo extends React.Component {
         {this.renderModelDetails()}
       </div>
     ) : (
-      "Loading..."
+      <Spinner />
     );
   }
 }
-
-
 
 export default layout(MoreDetailedInfo);

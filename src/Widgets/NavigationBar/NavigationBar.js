@@ -1,11 +1,11 @@
 import React from "react";
-import {Link} from 'react-router-dom';
+import { Link } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 
 const NavigationBar = ({ logoUrl, brandText, linkURL }) => {
   return (
     <Navbar bg="primary" variant="dark">
-        <Link to={linkURL}>
+      <Link to={linkURL}>
         <Navbar.Brand>
           <img
             alt=""
@@ -16,7 +16,7 @@ const NavigationBar = ({ logoUrl, brandText, linkURL }) => {
           />
           {brandText}
         </Navbar.Brand>
-        </Link>
+      </Link>
     </Navbar>
   );
 };
